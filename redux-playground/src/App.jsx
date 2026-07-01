@@ -1,37 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-import { Display } from './Display'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import "./App.css";
+import { Display } from "./Display";
+
+import { increase } from "./counterSlice";
+import { decrease} from "./counterSlice";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
+  const disPatch = useDispatch();
+
+  
+  const increaseCount = () => {
+    disPatch(increase());
+  };
+  const decreaseCount = () => {
+    disPatch(decrease());
+
+  };
   return (
     <>
       <section id="center">
-       
-<Display count={count} />
+        <Display />
         <button
           type="button"
           className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={increaseCount}
         >
-         +
+          +
         </button>
         <button
           type="button"
           className="counter"
-          onClick={() => setCount((count) => count - 1)}
+          onClick={decreaseCount}
         >
           -
         </button>
       </section>
-
-     
     </>
-  )
+  );
 }
 
-export default App
+export default App;
